@@ -1,68 +1,9 @@
 "use client";
 import { useState } from "react";
 import { UncontrolledBoard, KanbanBoard } from "@caldwell619/react-kanban";
-import "@caldwell619/react-kanban/dist/styles.css"; // import here for "builtin" styles
-
-const columnNames = ["Applied", "Tasked", "Interviewing", "Offer", "Rejected"];
-const cards = [
-  {
-    id: 1,
-    title: "Google",
-    description: "Software Engineer 1",
-    status: "Applied",
-    subtitle: "Applied on 2025-05-20",
-  },
-  {
-    id: 2,
-    title: "Instagram",
-    description: "Software Engineer 1",
-    status: "Tasked",
-    subtitle: "Tasked on 2025-05-20",
-  },
-  {
-    id: 3,
-    title: "Aramco",
-    description: "Senior Software Engineer",
-    status: "Interviewing",
-    subtitle: "Interviewing on 2025-05-20",
-  },
-  {
-    id: 4,
-    title: "Amazon",
-    description: "Software Engineer 1",
-    status: "Offer",
-    subtitle: "Offer on 2025-05-20",
-  },
-  {
-    id: 5,
-    title: "Apple",
-    description: "Software Engineer 1",
-    status: "Rejected",
-    subtitle: "Rejected on 2025-05-20",
-  },
-  {
-    id: 6,
-    title: "Microsoft",
-    description: "Software Engineer 1",
-    status: "Rejected",
-    subtitle: "Rejected on 2025-05-20",
-  },
-  {
-    id: 7,
-    title: "Facebook",
-    description: "Software Engineer 1",
-    status: "Applied",
-    subtitle: "Applied on 2025-05-20",
-  },
-  {
-    id: 8,
-    title: "Twitter",
-    description: "Software Engineer 1",
-    status: "Interviewing",
-    subtitle: "Interviewing on 2025-05-20",
-  },
-];
-
+import "@caldwell619/react-kanban/dist/styles.css"; 
+import { cards } from "./cards";
+import { CardStatus } from "./types";
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -73,7 +14,7 @@ export default function Home() {
     status: string;
     subtitle: string;
   }> = {
-    columns: columnNames.map((columnName) => ({
+    columns: Object.keys(CardStatus).map((columnName) => ({
       id: columnName,
       title: columnName,
       cards: cards.filter((card) => card.status === columnName),
