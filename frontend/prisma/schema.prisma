@@ -6,10 +6,45 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+
+model Application {
+  id           Int           @id @default(autoincrement())
+  title        String
+  company      String
+  location     String?
+  status       Status        @default(APPLIED)
+  dateApplied  DateTime      @default(now())
+  link         String?
+  notes        String?
+  tags         Tag[]
+  coverLetters CoverLetter[]
+}
+
+model Tag {
+  id            Int             @id @default(autoincrement())
+  name          String
+  applications  Application[]
+}
+
+model CoverLetter {
+  id            Int          @id @default(autoincrement())
+  content       String
+  createdAt     DateTime     @default(now())
+  applicationId Int
+  application   Application  @relation(fields: [applicationId], references: [id])
+}
+
+enum Status {
+    APPLIED
+    TASKED
+    INTERVIEWING
+    OFFER
+    REJECTED
 }

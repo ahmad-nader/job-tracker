@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UncontrolledBoard, KanbanBoard } from "@caldwell619/react-kanban";
 import "@caldwell619/react-kanban/dist/styles.css"; 
 import { cards } from "./cards";
 import { CardStatus } from "./types";
+import { getApplications } from "./components/Applications";
+
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -27,7 +29,6 @@ export default function Home() {
 
   return (
     <div className="flex h-screen font-[family-name:var(--font-geist-sans)]">
-      {/* Sidebar */}
       <aside
         className={`relative transition-all duration-300 ease-in-out  p-6 shadow-md border-r border-gray-200 ${
           isSidebarOpen ? "w-64" : "w-16"
@@ -94,7 +95,6 @@ export default function Home() {
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 p-8 overflow-auto">
         <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
         <UncontrolledBoard initialBoard={board} />
