@@ -1,7 +1,7 @@
 export enum CardStatus {
-    Applied = "Applied",
-    Tasked = "Tasked",
-    Interviewing = "Interviewing",
-    Offer = "Offer",
-    Rejected = "Rejected",
+    APPLIED = "APPLIED",
+    TASKED = "TASKED",
+    INTERVIEWING = "INTERVIEWING",
+    OFFER = "OFFER",
+    REJECTED = "REJECTED",
 }
