@@ -1,20 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import { UncontrolledBoard, KanbanBoard } from "@caldwell619/react-kanban";
+import { UncontrolledBoard, KanbanBoard, OnDragEnd } from "@caldwell619/react-kanban";
 import "@caldwell619/react-kanban/dist/styles.css";
 import { CardStatus } from "./types";
-import { getApplications } from "./components/Applications";
+import { getApplications, updateApplicationStatus } from "./components/Applications";
+import { Status } from "@prisma/client";
+import { BoardCard } from "./types";
 
 export default function Home() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [board, setBoard] = useState<KanbanBoard<{
-        id: number | string;
-        title: string;
-        description: string;
-        status: string;
-        subtitle: string;
-    }>>()
+    const [board, setBoard] = useState<KanbanBoard<BoardCard>>()
 
+    const handleCardMove = (_board: KanbanBoard<BoardCard>, subject: BoardCard, _source: OnDragEnd<BoardCard>['source'], destination: OnDragEnd<BoardCard>['destination']) => {
+        const cardId = subject.id;
+        updateApplicationStatus(cardId, destination?.toColumnId as Status)
+    }
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -23,13 +23,7 @@ export default function Home() {
     useEffect(() => {
         async function getApps() {
             const apps = await getApplications();
-            const board: KanbanBoard<{
-                id: number | string;
-                title: string;
-                description: string;
-                status: string;
-                subtitle: string;
-            }> = {
+            const board: KanbanBoard<BoardCard> = {
                 columns: Object.keys(CardStatus).map((columnName) => ({
                     id: columnName,
                     title: columnName,
@@ -39,7 +33,7 @@ export default function Home() {
                             id: card.id,
                             title: card.title,
                             description: card.company || "",
-                            status: card.status,
+                            status: card.status as Status,
                             subtitle: card.company || "",
                         })) || [],
                 })),
@@ -117,7 +111,9 @@ export default function Home() {
 
             <main className="flex-1 p-8 overflow-auto">
                 <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
-                {board && <UncontrolledBoard initialBoard={board} />}
+                {/* https://github.com/christopher-caldwell/react-kanban/issues/47 */}
+                {/*  @ts-ignore */}
+                {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} />}
             </main>
         </div>
     );
