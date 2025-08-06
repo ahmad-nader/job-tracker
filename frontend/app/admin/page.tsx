@@ -19,15 +19,14 @@ export default function CreateApplicationPage() {
       company: "",
       location: "",
       status: "APPLIED",
-      dateApplied: new Date().toISOString().slice(0, 10), // YYYY-MM-DD
+          dateApplied: new Date().toISOString().slice(0, 10), 
       link: "",
       notes: "",
       tags: "",
     },
   });
 
-  const onSubmit = async (data: FormData) => {
-    // Convert tags to array if needed
+    const onSubmit = async (data: FormData) => {
     const payload = {
       ...data,
       tags: data.tags ? data.tags.split(",").map(tag => tag.trim()) : [],
