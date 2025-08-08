@@ -15,7 +15,6 @@ export async function updateApplicationStatus(id: number, status: Status) {
     return updatedApplication;
 }
 
-
 export async function createApplication(data: Application) {
     const application = await prisma.application.create({
         data,
