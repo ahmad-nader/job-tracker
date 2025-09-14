@@ -6,11 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-  },
+    "lint": "next lint",
+    "seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' prisma/seed.ts"
+},
   "dependencies": {
     "@caldwell619/react-kanban": "^0.0.12",
     "@hello-pangea/dnd": "^18.0.1",
