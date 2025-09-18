@@ -41,10 +41,8 @@ export default function Home() {
 
     return (
         <div className="flex h-screen font-[family-name:var(--font-geist-sans)] flex-col p-8 ">
-
-                <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
-                {/* https://github.com/christopher-caldwell/react-kanban/issues/47 */}
-                {/*  @ts-ignore */}
+            <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
+            {/*  @ts-expect-error known issue from library https://github.com/christopher-caldwell/react-kanban/issues/47*/}
             {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} />}
         </div>
     );
