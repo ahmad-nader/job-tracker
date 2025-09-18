@@ -1,7 +1,9 @@
+ 
 "use client";
 import { useState } from "react";
 import "@caldwell619/react-kanban/dist/styles.css";
 import SidebarButton from "./SidebarButton";
+import Link from "next/link";
 
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -17,22 +19,12 @@ export default function Sidebar() {
             >
                 <SidebarButton isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
                 <div className={`${isSidebarOpen ? "block mt-8" : "hidden"}`}>
-                    <h2 className="text-xl font-semibold mb-4">Sidebar</h2>
                     <ul className="space-y-2">
                         <li>
-                            <a href="#" className="block p-2 rounded ">
-                                Dashboard
-                            </a>
+                            <Link href="/" className="block p-2 rounded ">Dashboard</Link>
                         </li>
                         <li>
-                            <a href="#" className="block p-2 rounded ">
-                                Applications
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="block p-2 rounded ">
-                                Settings
-                            </a>
+                            <Link href="/admin" className="block p-2 rounded ">Admin</Link>
                         </li>
                     </ul>
                 </div>
