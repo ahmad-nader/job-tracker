@@ -25,6 +25,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.react-kanban-board {
+  overflow-y: scroll !important;
+}
+
 .react-kanban-column {
   background-color: var(--background) !important;
 }

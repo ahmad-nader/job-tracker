@@ -28,7 +28,7 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <div className={"flex flex-row h-screen overflow-x-scroll overflow-y-hidden"}>
+                <div className={"flex flex-row h-screen overflow-x-scroll overflow-y-scroll"}>
                     <Sidebar />
                     {children}
                 </div>
