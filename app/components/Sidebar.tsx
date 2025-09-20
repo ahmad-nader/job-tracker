@@ -10,12 +10,12 @@ export default function Sidebar() {
 
     return (
         <div
-            className={`h-full bg-gray-800 text-white transition-all duration-300
-                ${isSidebarOpen ? "w-64" : "w-16"}`}
+            className={`h-full bg-[#FAFAFA] text-black transition-all duration-300
+                ${isSidebarOpen ? "w-48" : "w-16"}`}
         >
             <aside
                 className={`relative h-full transition-all duration-300 ease-in-out p-6 shadow-md border-r border-gray-200
-                    ${isSidebarOpen ? "w-64" : "w-16"}`}
+                    ${isSidebarOpen ? "w-48" : "w-16"}`}
             >
                 <SidebarButton isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
                 <div className={`${isSidebarOpen ? "block mt-8" : "hidden"}`}>

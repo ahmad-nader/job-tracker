@@ -6,10 +6,15 @@ import { CardStatus } from "./types";
 import { getApplications, updateApplicationStatus } from "./components/Applications";
 import { Status } from "@prisma/client";
 import { BoardCard } from "./types";
+import { Button } from "@mui/material";
+import { EditModal } from "./components/DetailsModal";
 
 export default function Home() {
     const [board, setBoard] = useState<KanbanBoard<BoardCard>>()
-
+    const [open, setOpen] = useState(false);
+    // const [modalApplication, setJobApplication] = useState();
+    const handleOpen = () => setOpen(true);
+  
     const handleCardMove = (_board: KanbanBoard<BoardCard>, subject: BoardCard, _source: OnDragEnd<BoardCard>['source'], destination: OnDragEnd<BoardCard>['destination']) => {
         const cardId = subject.id;
         updateApplicationStatus(cardId, destination?.toColumnId as Status)
@@ -42,6 +47,8 @@ export default function Home() {
     return (
         <div className="flex h-screen font-[family-name:var(--font-geist-sans)] flex-col p-8 ">
             <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
+            <Button onClick={handleOpen}>Open modal</Button>
+            <EditModal open={open} setOpen={setOpen} /> 
             {/*  @ts-expect-error known issue from library https://github.com/christopher-caldwell/react-kanban/issues/47*/}
             {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} />}
         </div>
