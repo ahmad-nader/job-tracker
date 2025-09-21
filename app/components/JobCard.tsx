@@ -12,7 +12,7 @@ export const JobCard = ({
     jobId
 } : JobCardProps) => {
   return (
-    <div className="rounded-lg shadow-md p-4 mb-4" key={jobId}>
+    <div className="rounded-lg shadow-md p-4 mb-4 w-full sm:w-72 max-w-sm" key={jobId}>
       <p className="text-gray-600 text-sm">{title}</p>
       <h3 className="text-xl font-semibold mb-4 mt-1.5">{company}</h3>
       <div className="flex flex-row justify-between  items-center">
