@@ -8,6 +8,7 @@ import { Status } from "@prisma/client";
 import { BoardCard } from "./types";
 import { Button } from "@mui/material";
 import { EditModal } from "./components/DetailsModal";
+import { JobCard } from "./components/JobCard";
 
 export default function Home() {
     const [board, setBoard] = useState<KanbanBoard<BoardCard>>()
@@ -33,9 +34,9 @@ export default function Home() {
                         ?.map((card) => ({
                             id: card.id,
                             title: card.title,
-                            description: card.company || "",
+                            company: card.company || "",
                             status: card.status as Status,
-                            subtitle: card.company || "",
+                            location: card.location || "",
                         })) || [],
                 })),
             };
@@ -50,7 +51,9 @@ export default function Home() {
             <Button onClick={handleOpen}>Open modal</Button>
             <EditModal open={open} setOpen={setOpen} /> 
             {/*  @ts-expect-error known issue from library https://github.com/christopher-caldwell/react-kanban/issues/47*/}
-            {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} />}
+            {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} renderCard={ (card) => {
+                return <JobCard title={card.title} company={card.company} location={card.location} jobId={card.id}/>
+            }}/>}
         </div>
     );
 }
