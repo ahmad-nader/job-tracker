@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 
 import { DetailsModal } from "./DetailsModal";
-
+import {description} from "./description" 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: "Example/DetailsModal",
@@ -27,6 +27,13 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     open: true,
-    setOpen: () => {}
+    setOpen: () => {},
+    title: "Senior Frontend Developer",
+    company: "Generic Company Name",
+    location: "Cairo, Egypt",
+    jobId: 1,
+    description: description,
+    tags: ["frontend", "python", "react"],
+    link: "www.example.com"
   },
 };
