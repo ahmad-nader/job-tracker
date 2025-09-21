@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { Box, Modal } from "@mui/material";
 
-interface EditModalProps {
+interface DetailsModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
-export const EditModal = ({ open, setOpen }: EditModalProps) => {
+export const DetailsModal = ({ open, setOpen }: DetailsModalProps) => {
   const handleClose = () => setOpen(false);
 
   const style = {
