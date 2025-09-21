@@ -1,4 +1,4 @@
-import { Status } from "./generated/prisma";
+import { Status } from "@prisma/client";
 
 export enum CardStatus {
     APPLIED = "APPLIED",
@@ -11,7 +11,7 @@ export enum CardStatus {
 export interface BoardCard {
     id: number;
     title: string;
-    description: string;
+    company: string;
+    location: string;
     status: Status;
-    subtitle: string;
 }
