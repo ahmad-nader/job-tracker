@@ -60,7 +60,7 @@ export const DetailsModal = ({
             </IconButton>
           </div>
           <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
-            <div className="h-80 w-full resize-none rounded-md border border-gray-300 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-50 overflow-scroll">
+            <div className="h-80 w-full resize-none rounded-md border border-gray-300 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-50 overflow-scroll mb-2">
               <ReactMarkdown>{description}</ReactMarkdown>
             </div>
 
