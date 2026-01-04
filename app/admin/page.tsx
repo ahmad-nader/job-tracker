@@ -58,6 +58,7 @@ export default function CreateApplicationPage() {
     <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-4">
       {/* Title */}
       <div>
+        <label htmlFor="title">Job Title</label>
         <input
           {...register("title", { required: "Job title is required" })}
           placeholder="Job Title"
@@ -70,6 +71,7 @@ export default function CreateApplicationPage() {
 
       {/* Company */}
       <div>
+        <label htmlFor="company">Company</label>
         <input
           {...register("company", { required: "Company is required" })}
           placeholder="Company"
@@ -83,6 +85,7 @@ export default function CreateApplicationPage() {
       </div>
 
       {/* Location */}
+      <label htmlFor="location">Location</label>
       <input
         {...register("location")}
         placeholder="Location"
@@ -90,6 +93,7 @@ export default function CreateApplicationPage() {
       />
 
       {/* Status */}
+      <label htmlFor="status">Status</label>
       <select
         {...register("status", { required: "Status is required" })}
         className={getInputClasses("status")}
@@ -106,6 +110,7 @@ export default function CreateApplicationPage() {
 
       {/* Date */}
       <div>
+        <label htmlFor="dateApplied">Date Applied</label>
         <input
           type="date"
           {...register("dateApplied", { required: "Date is required" })}
@@ -119,6 +124,7 @@ export default function CreateApplicationPage() {
       </div>
 
       {/* Link */}
+      <label htmlFor="link">Application Link</label>
       <input
         {...register("link")}
         placeholder="Application Link"
@@ -126,6 +132,7 @@ export default function CreateApplicationPage() {
       />
 
       {/* Notes */}
+      <label htmlFor="notes">Notes</label>
       <textarea
         {...register("notes")}
         placeholder="Notes"
