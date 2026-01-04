@@ -47,15 +47,15 @@ export default function CreateApplicationPage() {
     }
   };
   const getInputClasses = (fieldName: keyof FormData) =>
-    `w-full p-2 border rounded ${
+    `w-full p-2 border rounded mb-4 ${
       errors[fieldName] ? "border-red-500" : "border-gray-300"
     }`;
 
   return (
-    <main className="max-w-lg mx-auto p-8">
+    <div className="max-w-3xl p-8">
     <h1 className="text-2xl font-bold mb-6">Create Job Application</h1>
     <ToastContainer />
-    <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col w-3xl">
       {/* Title */}
       <div>
         <label htmlFor="title">Job Title</label>
@@ -142,11 +142,11 @@ export default function CreateApplicationPage() {
       {/* Submit */}
       <button
         type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-4 py-2 rounded ml-auto"
       >
         Create Application
       </button>
     </form>
-  </main>
+  </div>
   );
 }
