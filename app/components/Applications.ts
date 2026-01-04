@@ -3,7 +3,11 @@ import  prisma  from "@/app/lib/prisma";
 import { Status } from "@prisma/client";
 import { Application } from "@prisma/client";
 export  async function getApplications() {
-    const applications = await prisma.application.findMany();
+    const applications = await prisma.application.findMany({
+        include: {
+            tags: true, 
+        }
+    });
     return applications;
 }
 

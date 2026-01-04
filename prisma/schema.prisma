@@ -21,6 +21,7 @@ model Application {
   location     String?
   status       Status        @default(APPLIED)
   dateApplied  DateTime      @default(now())
+  description  String?
   link         String?
   notes        String?
   tags         Tag[]

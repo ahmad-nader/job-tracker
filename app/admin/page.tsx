@@ -1,7 +1,7 @@
 "use client";
 import { SubmitErrorHandler, useForm } from "react-hook-form";
 import { createApplication } from "../components/Applications";
-import { Status } from "@prisma/client";
+import { Status, Tag } from "@prisma/client";
 import { ToastContainer, toast } from "react-toastify";
 type FormData = {
   title: string;
@@ -9,9 +9,10 @@ type FormData = {
   location: string;
   status: Status;
   dateApplied: Date;
+  description: string | null;
   link: string;
   notes: string;
-  tags: string[] | null;
+  tags: Tag[] | null;
 };
 
 export default function CreateApplicationPage() {

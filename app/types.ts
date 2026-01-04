@@ -1,4 +1,4 @@
-import { Status } from "@prisma/client";
+import { Status, Tag } from "@prisma/client";
 
 export enum CardStatus {
     APPLIED = "APPLIED",
@@ -14,4 +14,20 @@ export interface BoardCard {
     company: string;
     location: string;
     status: Status;
+    description?: string;
+    tags?: Tag[];
+    link?: string;
+}
+
+export interface ApplicationWithTags {
+    id: number;
+    title: string;
+    company: string;
+    location: string | null;
+    status: Status;
+    dateApplied: Date;
+    description: string | null;
+    link: string | null;
+    notes: string | null;
+    tags: Tag[];
 }
