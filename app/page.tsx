@@ -23,7 +23,7 @@ export default function Home() {
 
     return (
         <div className="flex h-screen font-[family-name:var(--font-geist-sans)] flex-col p-8  overflow-auto">
-            <h1 className="text-2xl font-bold mb-6">Job Application Tracker</h1>
+            <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
             {   isDetailsModalOpen &&   <DetailsModal
                 open={detailsModalAppId !== null}
