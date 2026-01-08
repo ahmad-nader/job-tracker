@@ -42,7 +42,7 @@ export default function Home() {
             />}
             
             {/*  @ts-expect-error known issue from library https://github.com/christopher-caldwell/react-kanban/issues/47 */}
-            {board && <UncontrolledBoard initialBoard={board} onCardDragEnd={handleCardMove} renderCard={ (card) => {
+            {board && <UncontrolledBoard  allowRemoveColumn={false} initialBoard={board} onCardDragEnd={handleCardMove} renderCard={ (card) => {
                 return <JobCard title={card.title} company={card.company} location={card.location} jobId={card.id} onClick={() => {
                     setIsDetailsModalOpen(true);
                     setDetailsModalAppId(card.id)}}/>
