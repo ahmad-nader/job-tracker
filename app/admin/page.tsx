@@ -3,6 +3,8 @@ import { SubmitErrorHandler, useForm } from "react-hook-form";
 import { createApplication } from "../components/Applications";
 import { Status, Tag } from "@prisma/client";
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react"; // Import useState
+
 type FormData = {
   title: string;
   company: string;
@@ -15,6 +17,13 @@ type FormData = {
   tags: Tag[] | null;
 };
 
+const formatDateToISO = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
 export default function CreateApplicationPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues: {
@@ -22,16 +31,20 @@ export default function CreateApplicationPage() {
       company: "",
       location: "",
       status: "APPLIED",
-      dateApplied: new Date(),
+      dateApplied: formatDateToISO(new Date()) as unknown as Date, // Cast to Date as react-hook-form expects Date type for date inputs
       link: "",
       notes: "",
     },
   });
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+
   const notifySuccess = (message: string) => toast.success(message);
   const notifyFailure = (message: string) => toast.error(message);
   const onError: SubmitErrorHandler<FormData> = () =>
     notifyFailure("Failed to create application. Please check your form inputs are valid.");
+  
   const onSubmit = async (data: FormData) => {
+    setIsLoading(true); // Set loading to true
     const payload = {
       ...data,
       dateApplied: new Date(data.dateApplied),
@@ -44,6 +57,8 @@ export default function CreateApplicationPage() {
       }
     } catch {
       notifyFailure("Failed to create application.");
+    } finally {
+      setIsLoading(false); // Set loading to false regardless of success or failure
     }
   };
   const getInputClasses = (fieldName: keyof FormData) =>
@@ -105,7 +120,7 @@ export default function CreateApplicationPage() {
         <option value="REJECTED">Rejected</option>
       </select>
       {errors.status && (
-        <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
+          <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
       )}
 
       {/* Date */}
@@ -143,8 +158,9 @@ export default function CreateApplicationPage() {
       <button
         type="submit"
         className="bg-blue-600 text-white px-4 py-2 rounded ml-auto"
+        disabled={isLoading}
       >
-        Create Application
+        {isLoading ? 'Creating...' : 'Create Application'}
       </button>
     </form>
   </div>
