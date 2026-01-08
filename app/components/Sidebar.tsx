@@ -4,6 +4,8 @@ import { useState } from "react";
 import "@caldwell619/react-kanban/dist/styles.css";
 import SidebarButton from "./SidebarButton";
 import Link from "next/link";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CreateIcon from '@mui/icons-material/Create';
 
 export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -21,10 +23,10 @@ export default function Sidebar() {
                 <div className={`${isSidebarOpen ? "block mt-8" : "hidden"}`}>
                     <ul className="space-y-2">
                         <li>
-                            <Link href="/" className="block p-2 rounded ">Dashboard</Link>
+                            <Link href="/" className="block p-2 rounded flex items-center"> <DashboardIcon className="mr-2" /> Dashboard</Link>
                         </li>
                         <li>
-                            <Link href="/admin" className="block p-2 rounded ">Admin</Link>
+                            <Link href="/admin" className="block p-2 rounded flex items-center"><CreateIcon className="mr-2" /> Admin</Link>
                         </li>
                     </ul>
                 </div>
