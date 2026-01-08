@@ -22,7 +22,7 @@ export default function Home() {
 
 
     return (
-        <div className="flex h-screen font-[family-name:var(--font-geist-sans)] flex-col p-8  overflow-auto">
+        <div className="flex h-screen font-[family-name:var(--font-geist-sans)] flex-col p-8">
             <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
             {   isDetailsModalOpen &&   <DetailsModal
@@ -42,7 +42,7 @@ export default function Home() {
             />}
             
             {/*  @ts-expect-error known issue from library https://github.com/christopher-caldwell/react-kanban/issues/47 */}
-            {board && <UncontrolledBoard  allowRemoveColumn={false} initialBoard={board} onCardDragEnd={handleCardMove} renderCard={ (card) => {
+            {board && <UncontrolledBoard className="mx-auto" allowRemoveColumn={false} initialBoard={board} onCardDragEnd={handleCardMove} renderCard={ (card) => {
                 return <JobCard title={card.title} company={card.company} location={card.location} jobId={card.id} onClick={() => {
                     setIsDetailsModalOpen(true);
                     setDetailsModalAppId(card.id)}}/>

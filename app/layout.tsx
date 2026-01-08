@@ -30,7 +30,9 @@ export default function RootLayout({
             >
                 <div className={"flex flex-row h-screen overflow-x-scroll overflow-y-scroll"}>
                     <Sidebar />
-                    {children}
+                    <div className="flex-grow flex flex-col items-center">
+                        {children}
+                    </div>
                 </div>
 
             </body>
