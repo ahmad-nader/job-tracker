@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Box, Modal } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { description as fakeDescription } from "./description";
+import Link from "next/link"; // Add this import
 
 interface DetailsModalProps {
   open: boolean;
@@ -14,6 +15,14 @@ interface DetailsModalProps {
   tags: string[];
   link: string;
 }
+const formatLink = (url: string) => {
+    if (!url) return "#"; // Return a safe value for empty links
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
+    }
+    return `https://${url}`;
+};
+
 export const DetailsModal = ({
   open,
   setOpen,
@@ -40,16 +49,22 @@ export const DetailsModal = ({
         <Box className="absolute left-1/2 top-1/2 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white shadow-xl outline-none">
           <div className="flex items-start justify-between border-b px-6 py-4">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{company}</h2>
               <p className="text-sm text-gray-600">
-                {company} · {location}
+                {title} · {location}
               </p>
             </div>
 
           </div>
           <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
             <div className="h-80 w-full resize-none rounded-md border border-gray-300 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-50 overflow-scroll mb-2">
-              <ReactMarkdown>{description || fakeDescription}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  h2: ({ ...props }) => <h2 className="text-2xl font-bold" {...props} />,
+                }}
+              >
+                {description || fakeDescription}
+              </ReactMarkdown>
             </div>
 
             <div className="mb-4 flex flex-wrap gap-2">
@@ -63,14 +78,14 @@ export const DetailsModal = ({
               ))}
             </div>
 
-            <a
-              href={link}
+            <Link
+              href={formatLink(link)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
             >
               {link}
-            </a>
+            </Link>
           </div>
           <div className="flex justify-end border-t px-6 py-4">
             <button
