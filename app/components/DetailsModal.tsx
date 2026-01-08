@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Box, Modal } from "@mui/material";
 import ReactMarkdown from "react-markdown";
+import { description as fakeDescription } from "./description";
 
 interface DetailsModalProps {
   open: boolean;
@@ -48,7 +49,7 @@ export const DetailsModal = ({
           </div>
           <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
             <div className="h-80 w-full resize-none rounded-md border border-gray-300 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-50 overflow-scroll mb-2">
-              <ReactMarkdown>{description}</ReactMarkdown>
+              <ReactMarkdown>{description || fakeDescription}</ReactMarkdown>
             </div>
 
             <div className="mb-4 flex flex-wrap gap-2">
