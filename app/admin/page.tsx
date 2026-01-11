@@ -18,6 +18,29 @@ type FormData = {
   tags: Tag[] | null;
 };
 
+const applicationStatuses = [
+{
+    value: "APPLIED",
+    label: "Applied",
+},
+{
+    value: "INTERVIEWING",
+    label: "Interviewing",
+},
+{
+    value: "TASKED",
+    label: "Tasked",
+},
+{
+    value: "OFFER",
+    label: "Offer",
+},
+{
+    value: "REJECTED",
+    label: "Rejected",
+}
+];
+
 
 export default function CreateApplicationPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -104,11 +127,9 @@ export default function CreateApplicationPage() {
         {...register("status", { required: "Status is required" })}
         className={getInputClasses("status")}
       >
-        <option value="APPLIED">Applied</option>
-        <option value="TASKED">Tasked</option>
-        <option value="INTERVIEWING">Interviewing</option>
-        <option value="OFFER">Offer</option>
-        <option value="REJECTED">Rejected</option>
+        {applicationStatuses.map((status) => (
+          <option key={status.value} value={status.value}>{status.label}</option>
+        ))}
       </select>
       {errors.status && (
           <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
