@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Box, Modal } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { description as fakeDescription } from "./description";
-import Link from "next/link"; 
+import Link from "next/link";
 import { formatLink } from "../utils/utils";
 
 interface DetailsModalProps {
@@ -17,7 +17,6 @@ interface DetailsModalProps {
   link: string;
 }
 
-
 export const DetailsModal = ({
   open,
   setOpen,
@@ -30,7 +29,6 @@ export const DetailsModal = ({
   link,
 }: DetailsModalProps) => {
   const handleClose = () => setOpen(false);
-
 
   return (
     <>
@@ -49,13 +47,14 @@ export const DetailsModal = ({
                 {title} · {location}
               </p>
             </div>
-
           </div>
           <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
             <div className="h-80 w-full resize-none rounded-md border border-gray-300 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-50 overflow-scroll mb-2">
               <ReactMarkdown
                 components={{
-                  h2: ({ ...props }) => <h2 className="text-2xl font-bold" {...props} />,
+                  h2: ({ ...props }) => (
+                    <h2 className="text-2xl font-bold" {...props} />
+                  ),
                 }}
               >
                 {description || fakeDescription}
@@ -83,6 +82,15 @@ export const DetailsModal = ({
             </Link>
           </div>
           <div className="flex justify-end border-t px-6 py-4">
+            <button
+              onClick={() => {
+                // navigate to admin page with jobId
+                window.location.href = `/admin?jobId=${jobId}`;
+              }}
+              className="rounded-md  px-4 mr-2 py-2 text-sm font-medium text-blue shadow hover:bg-gray-300"
+            >
+              Edit
+            </button>
             <button
               onClick={() => setOpen(false)}
               className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-blue-700"
