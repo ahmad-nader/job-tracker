@@ -3,7 +3,8 @@ import { SubmitErrorHandler, useForm } from "react-hook-form";
 import { createApplication } from "../components/Applications";
 import { Status, Tag } from "@prisma/client";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react"; // Import useState
+import { useState } from "react"; 
+import { formatDateToISO } from "../utils/utils";
 
 type FormData = {
   title: string;
@@ -17,12 +18,6 @@ type FormData = {
   tags: Tag[] | null;
 };
 
-const formatDateToISO = (date: Date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-};
 
 export default function CreateApplicationPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -31,12 +26,12 @@ export default function CreateApplicationPage() {
       company: "",
       location: "",
       status: "APPLIED",
-      dateApplied: formatDateToISO(new Date()) as unknown as Date, // Cast to Date as react-hook-form expects Date type for date inputs
+      dateApplied: formatDateToISO(new Date()) as unknown as Date, 
       link: "",
       notes: "",
     },
   });
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false); 
 
   const notifySuccess = (message: string) => toast.success(message);
   const notifyFailure = (message: string) => toast.error(message);
@@ -44,7 +39,7 @@ export default function CreateApplicationPage() {
     notifyFailure("Failed to create application. Please check your form inputs are valid.");
   
   const onSubmit = async (data: FormData) => {
-    setIsLoading(true); // Set loading to true
+    setIsLoading(true); 
     const payload = {
       ...data,
       dateApplied: new Date(data.dateApplied),
@@ -58,7 +53,7 @@ export default function CreateApplicationPage() {
     } catch {
       notifyFailure("Failed to create application.");
     } finally {
-      setIsLoading(false); // Set loading to false regardless of success or failure
+      setIsLoading(false); 
     }
   };
   const getInputClasses = (fieldName: keyof FormData) =>
@@ -71,7 +66,6 @@ export default function CreateApplicationPage() {
     <h1 className="text-2xl font-bold mb-6">Create Job Application</h1>
     <ToastContainer />
     <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col w-3xl">
-      {/* Title */}
       <div>
         <label htmlFor="title">Job Title</label>
         <input
@@ -84,7 +78,6 @@ export default function CreateApplicationPage() {
         )}
       </div>
 
-      {/* Company */}
       <div>
         <label htmlFor="company">Company</label>
         <input
@@ -99,7 +92,6 @@ export default function CreateApplicationPage() {
         )}
       </div>
 
-      {/* Location */}
       <label htmlFor="location">Location</label>
       <input
         {...register("location")}
@@ -107,7 +99,6 @@ export default function CreateApplicationPage() {
         className={getInputClasses("location")}
       />
 
-      {/* Status */}
       <label htmlFor="status">Status</label>
       <select
         {...register("status", { required: "Status is required" })}
@@ -123,7 +114,6 @@ export default function CreateApplicationPage() {
           <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
       )}
 
-      {/* Date */}
       <div>
         <label htmlFor="dateApplied">Date Applied</label>
         <input
@@ -138,7 +128,6 @@ export default function CreateApplicationPage() {
         )}
       </div>
 
-      {/* Link */}
       <label htmlFor="link">Application Link</label>
       <input
         {...register("link")}
@@ -146,7 +135,6 @@ export default function CreateApplicationPage() {
         className={getInputClasses("link")}
       />
 
-      {/* Notes */}
       <label htmlFor="notes">Notes</label>
       <textarea
         {...register("notes")}
@@ -154,7 +142,6 @@ export default function CreateApplicationPage() {
         className={getInputClasses("notes")}
       />
 
-      {/* Submit */}
       <button
         type="submit"
         className="bg-blue-600 text-white px-4 py-2 rounded ml-auto"
