@@ -1,5 +1,5 @@
 export const formatLink = (url: string) => {
-    if (!url) return "#"; // Return a safe value for empty links
+    if (!url) return "#"; 
     if (url.startsWith('http://') || url.startsWith('https://')) {
         return url;
     }
