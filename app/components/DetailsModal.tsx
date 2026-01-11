@@ -2,7 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import { Box, Modal } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { description as fakeDescription } from "./description";
-import Link from "next/link"; // Add this import
+import Link from "next/link"; 
+import { formatLink } from "../utils/utils";
 
 interface DetailsModalProps {
   open: boolean;
@@ -15,13 +16,7 @@ interface DetailsModalProps {
   tags: string[];
   link: string;
 }
-const formatLink = (url: string) => {
-    if (!url) return "#"; // Return a safe value for empty links
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-        return url;
-    }
-    return `https://${url}`;
-};
+
 
 export const DetailsModal = ({
   open,
